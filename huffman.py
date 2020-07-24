@@ -53,6 +53,8 @@ class HuffmanTree:
 
 
 def huffman_encoding(data):
+    assert data != ''
+
     frequency_dict = {}
     for char in data:
         frequency_dict[char] = frequency_dict.get(char, 0) + 1
@@ -81,26 +83,52 @@ def huffman_encoding(data):
     return encoded, huffman_tree
 
 
-def huffman_decoding(data, tree):
-    pass
+def huffman_decoding(data, huffman_tree):
+    root = huffman_tree.root
+
+    # special case of one unique character
+    if root.character:
+        return data.replace('0', root.character)
+
+    decoded = ''
+    node = root
+    for b in data:
+        if b == '0':
+            node = node.left
+        if b == '1':
+            node = node.right
+        if node.character:
+            decoded += node.character
+            node = root
+    return decoded
 
 
 if __name__ == "__main__":
-    a_great_sentence = "The bird is the word"
-    message = 'AAAAAAABBBCCCCCCCDDEEEEEE'
-    answer = '1010101010101000100100111111111111111000000010101010101'
+    messages = list()
+    messages.append('a')
+    messages.append('bbb')
+    messages.append("The bird is the word")
+    messages.append('AAAAAAABBBCCCCCCCDDEEEEEE')
+    messages.append(
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus nec sem ac gravida. Phasellus "
+        "eu libero hendrerit, tincidunt erat nec, luctus metus. Praesent et odio in nisi tempor gravida. Sed eu "
+        "sem a libero tempor tempor. Cras ut neque commodo arcu sagittis pharetra. Vivamus at arcu non lorem "
+        "sollicitudin sagittis. Vivamus scelerisque ex ac rhoncus faucibus. Sed blandit ante non dolor "
+        "fringilla efficitur. In fringilla semper aliquet. Phasellus mattis, ante ac congue feugiat, "
+        "felis nisl gravida magna, ac laoreet tortor est id nibh. "
+    )
+    for message in messages:
+        print("The size of the data is: {}".format(sys.getsizeof(message)))
+        print("The content of the data is: {}\n".format(message))
 
-    print("The size of the data is: {}\n".format(sys.getsizeof(message)))
-    print("The content of the data is: {}\n".format(message))
+        encoded_data, tree = huffman_encoding(message)
 
-    encoded_data, tree = huffman_encoding(message)
+        print("The size of the encoded data is: {}".format(sys.getsizeof(int(encoded_data, base=2))))
+        print("The content of the encoded data is: {}\n".format(encoded_data))
 
-    assert encoded_data == answer
+        decoded_data = huffman_decoding(encoded_data, tree)
 
-    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    print("The content of the encoded data is: {}\n".format(encoded_data))
+        print("The size of the decoded data is: {}".format(sys.getsizeof(decoded_data)))
+        print("The content of the encoded data is: {}\n".format(decoded_data))
 
-    # decoded_data = huffman_decoding(encoded_data, tree)
-    #
-    # print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    # print("The content of the encoded data is: {}\n".format(decoded_data))
+        print()
