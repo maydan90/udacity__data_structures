@@ -9,28 +9,50 @@ class Node:
         self.left = None
         self.right = None
 
+    def __lt__(self, other):
+        return self.frequency < other.frequency
+
+    def __le__(self, other):
+        return self.frequency <= other.frequency
+
+    def __gt__(self, other):
+        return self.frequency > other.frequency
+
+    def __ge__(self, other):
+        return self.frequency >= other.frequency
+
+    def __eq__(self, other):
+        return self.frequency == other.frequency
+
+    def __ne__(self, other):
+        return self.frequency != other.frequency
+
+
+class HuffmanTree:
+    def __init__(self, root=None):
+        self.root = root
+
 
 def huffman_encoding(data):
     frequency_dict = {}
     for char in data:
         frequency_dict[char] = frequency_dict.get(char, 0) + 1
 
-    min_heap = [(f, Node(f, c)) for c, f in frequency_dict.items()]
+    min_heap = [Node(f, c) for c, f in frequency_dict.items()]
     heapq.heapify(min_heap)
 
     while len(min_heap) > 1:
-        frequency_left, left_child = heapq.heappop(min_heap)
-        print(frequency_left, left_child)
-        print(min_heap)
-        frequency_right, right_child = heapq.heappop(min_heap)
+        left_child = heapq.heappop(min_heap)
+        right_child = heapq.heappop(min_heap)
 
-        total_frequency = frequency_left + frequency_right
+        total_frequency = left_child.frequency + right_child.frequency
         internal_node = Node(total_frequency)
         internal_node.left = left_child
         internal_node.right = right_child
 
-        heapq.heappush(min_heap, (total_frequency, internal_node))
-    print(heapq.heappop(min_heap))
+        heapq.heappush(min_heap, internal_node)
+    huffman_tree = HuffmanTree(min_heap[0])
+    print(huffman_tree.root.left.frequency)
 
 
 def huffman_decoding(data, tree):
