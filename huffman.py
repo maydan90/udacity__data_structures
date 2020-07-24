@@ -32,6 +32,25 @@ class HuffmanTree:
     def __init__(self, root=None):
         self.root = root
 
+    def generate_codes(self):
+        start_node = self.root
+
+        # special case of one unique character
+        if start_node.character:
+            return {start_node.character: '0'}
+
+        codes = {}
+        stack = [(start_node, '')]
+
+        while stack:
+            current_node, current_code = stack.pop()
+            if current_node.character:
+                codes[current_node.character] = current_code
+            else:
+                stack.append((current_node.right, current_code + '1'))
+                stack.append((current_node.left, current_code + '0'))
+        return codes
+
 
 def huffman_encoding(data):
     frequency_dict = {}
@@ -51,8 +70,15 @@ def huffman_encoding(data):
         internal_node.right = right_child
 
         heapq.heappush(min_heap, internal_node)
+
     huffman_tree = HuffmanTree(min_heap[0])
-    print(huffman_tree.root.left.frequency)
+    codes = huffman_tree.generate_codes()
+
+    encoded = ''
+    for char in data:
+        encoded += codes[char]
+
+    return encoded, huffman_tree
 
 
 def huffman_decoding(data, tree):
@@ -60,8 +86,6 @@ def huffman_decoding(data, tree):
 
 
 if __name__ == "__main__":
-    codes = {}
-
     a_great_sentence = "The bird is the word"
     message = 'AAAAAAABBBCCCCCCCDDEEEEEE'
     answer = '1010101010101000100100111111111111111000000010101010101'
@@ -71,10 +95,12 @@ if __name__ == "__main__":
 
     encoded_data, tree = huffman_encoding(message)
 
+    assert encoded_data == answer
+
     print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
     print("The content of the encoded data is: {}\n".format(encoded_data))
 
-    decoded_data = huffman_decoding(encoded_data, tree)
-
-    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print("The content of the encoded data is: {}\n".format(decoded_data))
+    # decoded_data = huffman_decoding(encoded_data, tree)
+    #
+    # print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    # print("The content of the encoded data is: {}\n".format(decoded_data))
