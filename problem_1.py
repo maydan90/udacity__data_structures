@@ -30,7 +30,8 @@ class Queue:
         node = self.head  # copy the node reference to a local variable
 
         self.head = self.head.next  # shift the head (i.e., the front of the queue)
-        self.head.prev = None
+        if self.head:
+            self.head.prev = None
 
         node.prev = None
         node.next = None
@@ -79,9 +80,7 @@ class LRU_Cache(object):
     def get(self, key):
         # Retrieve item from provided key. Return -1 if nonexistent.
         if key in self._map:
-            print(self.order)
             self.order.move_to_end(self._map[key])
-            print(self.order)
             return self._map[key].value
         return -1
 
@@ -111,3 +110,21 @@ our_cache.set(5, 5)
 our_cache.set(6, 6)
 
 print(our_cache.get(3))  # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+
+our_cache1 = LRU_Cache(1)
+our_cache1.set(1, 1)
+print(our_cache1.get(1))  # returns 1
+our_cache1.set(2, 2)
+print(our_cache1.get(1))  # returns -1
+print(our_cache1.get(2))  # returns 2
+
+our_cache2 = LRU_Cache(128)
+
+for i in range(200):
+    our_cache2.set(i, i)
+    if i % 100 == 0:
+        print(our_cache2.get(5))  # returns 5
+
+print(our_cache2.get(200))  # returns -1
+print(our_cache2.get(5))  # returns 5
+print(our_cache2.get(11))  # returns -1

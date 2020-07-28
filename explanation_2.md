@@ -1,0 +1,1 @@
+After checking initial directory for specific files, the recursion of the same function was called for all sub-folders. 
