@@ -22,7 +22,7 @@ class Block:
         return sha.hexdigest()
 
     def __repr__(self):
-        return 'Timestamp: {}\nData: {}\nSHA256 Hash: {}\nPrev Hash: {}'\
+        return 'Timestamp: {}\nData: {}\nSHA256 Hash: {}\nPrev Hash: {}\n'\
             .format(self.timestamp, self.data, self.hash, self.previous_hash)
 
 
@@ -47,3 +47,5 @@ blockchain.add_block('some data 3')
 
 print(blockchain.tail)
 print(blockchain.tail.prev)
+print(blockchain.tail.prev.prev)
+print(blockchain.tail.prev.prev.prev)

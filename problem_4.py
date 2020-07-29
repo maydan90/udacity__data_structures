@@ -49,4 +49,6 @@ sub_child.add_user(sub_child_user)
 child.add_group(sub_child)
 parent.add_group(child)
 
-print(is_user_in_group("parent_user", parent))
+print(is_user_in_group("parent_user", parent))  # True
+print(is_user_in_group("sub_child_user", child))  # True
+print(is_user_in_group("parent_user", child))  # False

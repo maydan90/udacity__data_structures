@@ -1,0 +1,1 @@
+Two sets were constructed by traversing each linked list in O(size(list1) + size(list2)). Then union and intersection will take O(n + m) time where n -size of list1, and m is the size of list2. 

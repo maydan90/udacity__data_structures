@@ -90,8 +90,8 @@ def intersection(llist_1, llist_2):
 linked_list_1 = LinkedList()
 linked_list_2 = LinkedList()
 
-element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 21]
-element_2 = [6, 32, 4, 9, 6, 1, 11, 21, 1]
+element_1 = []
+element_2 = []
 
 for i in element_1:
     linked_list_1.append(i)
@@ -99,8 +99,8 @@ for i in element_1:
 for i in element_2:
     linked_list_2.append(i)
 
-print(union(linked_list_1, linked_list_2))
-print(intersection(linked_list_1, linked_list_2))
+print(union(linked_list_1, linked_list_2))  # empty
+print(intersection(linked_list_1, linked_list_2))  # empty
 
 # Test case 2
 
@@ -116,8 +116,8 @@ for i in element_1:
 for i in element_2:
     linked_list_4.append(i)
 
-print(union(linked_list_3, linked_list_4))
-print(intersection(linked_list_3, linked_list_4))
+print(union(linked_list_3, linked_list_4))  # 65 -> 2 -> 35 -> 3 -> 4 -> 6 -> 1 -> 7 -> 8 -> 9 -> 11 -> 21 -> 23 ->
+print(intersection(linked_list_3, linked_list_4))  # empty
 
 # Test case 3
 
@@ -133,5 +133,5 @@ for i in element_1:
 for i in element_2:
     linked_list_6.append(i)
 
-print(union(linked_list_5, linked_list_6))
-print(intersection(linked_list_5, linked_list_6))
+print(union(linked_list_5, linked_list_6))  # from 0 to 119
+print(intersection(linked_list_5, linked_list_6))  # 100
