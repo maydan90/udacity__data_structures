@@ -53,7 +53,8 @@ class HuffmanTree:
 
 
 def huffman_encoding(data):
-    assert data != ''
+    if data == '':
+        return '', HuffmanTree()
 
     frequency_dict = {}
     for char in data:
@@ -109,6 +110,7 @@ if __name__ == "__main__":
     messages.append('bbb')
     messages.append("The bird is the word")
     messages.append('AAAAAAABBBCCCCCCCDDEEEEEE')
+    messages.append('')
     messages.append(
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus nec sem ac gravida. Phasellus "
         "eu libero hendrerit, tincidunt erat nec, luctus metus. Praesent et odio in nisi tempor gravida. Sed eu "

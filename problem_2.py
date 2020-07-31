@@ -36,3 +36,8 @@ print(find_files('.c', 'testdir\\subdir2'))
 
 print(find_files('.py', '.'))
 # ['.\problem_1.py', '.\problem_2.py', '.\problem_3.py', '.\problem_4.py', '.\problem_5.py', '.\problem_6.py']
+
+print(find_files('', 'testdir'))
+# finds all files in testdir directory
+
+print(find_files('', 'testdir1'))

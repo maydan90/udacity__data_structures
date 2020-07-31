@@ -86,6 +86,9 @@ class LRU_Cache(object):
 
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
+        if self.capacity == 0:
+            return
+
         if key not in self._map:
             new_node = Node(key, value)
             if len(self._map) == self.capacity:
@@ -128,3 +131,10 @@ for i in range(200):
 print(our_cache2.get(200))  # returns -1
 print(our_cache2.get(5))  # returns 5
 print(our_cache2.get(11))  # returns -1
+
+our_cache3 = LRU_Cache(0)
+our_cache3.set(1, 1)
+print(our_cache3.get(1))  # returns -1
+print(our_cache3.get(2))  # returns -1
+our_cache3.set(2, 2)
+print(our_cache3.get(2))  # returns -1
