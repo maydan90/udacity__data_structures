@@ -49,3 +49,14 @@ print(blockchain.tail)
 print(blockchain.tail.prev)
 print(blockchain.tail.prev.prev)
 print(blockchain.tail.prev.prev.prev)
+
+blockchain_empty = Blockchain()
+print(blockchain_empty.tail)  # None
+
+blockchain_large = Blockchain()
+for i in range(1000):
+    blockchain_large.add_block('data' + str(i))
+print(blockchain_large.tail)
+print(blockchain_large.tail.prev)
+print(blockchain_large.tail.prev.prev)
+print(blockchain_large.tail.prev.prev.prev)

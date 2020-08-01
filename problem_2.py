@@ -18,14 +18,17 @@ def find_files(suffix, path):
        a list of paths
     """
     files = list()
-    for file_or_dir in os.listdir(path):
-        full_path = os.path.join(path, file_or_dir)
-        if os.path.isfile(full_path) and full_path.endswith(suffix):
-            files.append(full_path)
-        elif os.path.isdir(full_path):
-            output = find_files(suffix, full_path)
-            files.extend(output)
-    return files
+    if os.path.exists(path):
+        for file_or_dir in os.listdir(path):
+            full_path = os.path.join(path, file_or_dir)
+            if os.path.isfile(full_path) and full_path.endswith(suffix):
+                files.append(full_path)
+            elif os.path.isdir(full_path):
+                output = find_files(suffix, full_path)
+                files.extend(output)
+        return files
+    else:
+        return 'No such directory'
 
 
 print(find_files('.c', 'testdir'))

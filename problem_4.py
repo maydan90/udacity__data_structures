@@ -52,3 +52,17 @@ parent.add_group(child)
 print(is_user_in_group("parent_user", parent))  # True
 print(is_user_in_group("sub_child_user", child))  # True
 print(is_user_in_group("parent_user", child))  # False
+
+empty = Group("empty")
+print(is_user_in_group("", empty))  # False
+print(is_user_in_group("empty", empty))  # False
+
+deep_group = Group('deep')
+deep_child = deep_group
+for i in range(1000):
+    deep_child = Group('deep' + str(i))
+    deep_group.add_group(deep_child)
+deep_child.add_user('bbb')
+
+print(is_user_in_group("bb", deep_group))  # False
+print(is_user_in_group("bbb", deep_group))  # True

@@ -87,6 +87,10 @@ def huffman_encoding(data):
 def huffman_decoding(data, huffman_tree):
     root = huffman_tree.root
 
+    # special case of empty tree
+    if not root:
+        return ''
+
     # special case of one unique character
     if root.character:
         return data.replace('0', root.character)
@@ -124,8 +128,11 @@ if __name__ == "__main__":
         print("The content of the data is: {}\n".format(message))
 
         encoded_data, tree = huffman_encoding(message)
-
-        print("The size of the encoded data is: {}".format(sys.getsizeof(int(encoded_data, base=2))))
+        if message:
+            encoded_size = int(encoded_data, base=2)
+        else:
+            encoded_size = sys.getsizeof(message)
+        print("The size of the encoded data is: {}".format(sys.getsizeof(encoded_size)))
         print("The content of the encoded data is: {}\n".format(encoded_data))
 
         decoded_data = huffman_decoding(encoded_data, tree)

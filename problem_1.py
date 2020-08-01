@@ -132,6 +132,7 @@ print(our_cache2.get(200))  # returns -1
 print(our_cache2.get(5))  # returns 5
 print(our_cache2.get(11))  # returns -1
 
+# empty cache
 our_cache3 = LRU_Cache(0)
 our_cache3.set(1, 1)
 print(our_cache3.get(1))  # returns -1

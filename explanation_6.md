@@ -1,1 +1,2 @@
-Two sets were constructed by traversing each linked list in O(size(list1) + size(list2)). Then union and intersection will take O(n + m) time where n -size of list1, and m is the size of list2. 
+Two sets were constructed by traversing each linked list in O(size(list1) + size(list2)). Then union and intersection will take O(n + m) time where n -size of list1, and m is the size of list2.
+Space complexity: O(n + m) since we need to create sets from initial linked lists. Also, it depends on how many unique elements each list has. 
