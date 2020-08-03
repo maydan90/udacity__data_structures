@@ -43,4 +43,5 @@ print(find_files('.py', '.'))
 print(find_files('', 'testdir'))
 # finds all files in testdir directory
 
-print(find_files('', 'testdir1'))
+print(find_files('.c', 'this_path_does_not_exist'))
+# No such directory
